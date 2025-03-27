@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
 import { Calendar, Download } from "lucide-react";
 
 import { DashboardHeader } from "../components/DashboardHeader";
@@ -8,6 +9,10 @@ import { SalesReport } from "../components/SalesReport";
 import { InventoryReport } from "../components/InventoryReport";
 
 export default function ReportsPage() {
+  const location = useLocation();
+
+  const isActive = (path) => location.pathname === `/reports${path}`;
+
   return (
     <DashboardShell>
       <DashboardHeader heading="Reports" text="View and analyze your store performance.">
@@ -22,10 +27,34 @@ export default function ReportsPage() {
 
       <div className="space-y-4">
         <div className="flex space-x-2">
-          <button className="px-3 py-1 bg-blue-600 text-white rounded-md">Sales Reports</button>
-          <button className="px-3 py-1 bg-gray-200 text-gray-700 rounded-md">Inventory Reports</button>
-          <button className="px-3 py-1 bg-gray-200 text-gray-700 rounded-md">Category Analysis</button>
+          <Link
+            to="/reports/sales"
+            className={`px-3 py-1 rounded-md ${
+              isActive("/sales") || isActive("")
+                ? "bg-blue-600 text-white"
+                : "bg-gray-200 text-gray-700"
+            }`}
+          >
+            Sales Reports
+          </Link>
+          <Link
+            to="/reports/inventory"
+            className={`px-3 py-1 rounded-md ${
+              isActive("/inventory") ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700"
+            }`}
+          >
+            Inventory Reports
+          </Link>
+          <Link
+            to="/reports/category-analysis"
+            className={`px-3 py-1 rounded-md ${
+              isActive("/category-analysis") ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700"
+            }`}
+          >
+            Category Analysis
+          </Link>
         </div>
+
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <div className="border border-gray-300 rounded-md overflow-hidden">
             <div className="p-4 flex items-center justify-between">
@@ -68,7 +97,23 @@ export default function ReportsPage() {
             </div>
           </div>
         </div>
-        <SalesReport />
+
+        <Routes>
+          <Route path="/" element={<SalesReport />} />
+          <Route path="/sales" element={<SalesReport />} />
+          <Route path="/inventory" element={<InventoryReport />} />
+          <Route
+            path="/category-analysis"
+            element={
+              <div className="border border-gray-300 rounded-md p-6">
+                <h3 className="text-lg font-semibold">Category Analysis</h3>
+                <p className="text-sm text-gray-500">
+                  This section is under development. Check back later for detailed category analysis.
+                </p>
+              </div>
+            }
+          />
+        </Routes>
       </div>
     </DashboardShell>
   );

@@ -17,7 +17,11 @@ function App() {
         <Route path="/billing" element={<BillingPage />} />
         <Route path="/inventory" element={<InventoryPage />} />
         <Route path="/inventory/add" element={<AddProductPage />} />
-        <Route path="/reports" element={<ReportsPage />} />
+        <Route path="/reports/*" element={<ReportsPage />}>
+          <Route path="sales" element={<SalesReport />} />
+          <Route path="inventory" element={<InventoryReport />} />
+          <Route path="category-analysis" element={<div>Category Analysis Placeholder</div>} />
+        </Route>
       </Routes>
     </ThemeProvider>
   );
