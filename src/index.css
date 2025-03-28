@@ -1,7 +1,12 @@
+/* Import Pico CSS */
+@import "@picocss/pico/css/pico.min.css";
+
+/* Tailwind Directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Custom Styles */
 body {
   font-family: Arial, Helvetica, sans-serif;
   background-color: #ffffff;
