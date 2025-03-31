@@ -1,152 +1,194 @@
-import React, { useState } from "react";
+import React from "react";
 import {
-  Bar,
   BarChart,
-  CartesianGrid,
-  Legend,
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  Tooltip,
+  Bar,
   XAxis,
   YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  LineChart,
+  Line,
+  PieChart,
+  Pie,
+  Cell
 } from "recharts";
 
-const salesData = [
-  { date: "2023-01-01", govigyan: 4000, medicinal: 2400, total: 6400 },
-  { date: "2023-02-01", govigyan: 3000, medicinal: 1398, total: 4398 },
-  { date: "2023-03-01", govigyan: 2000, medicinal: 9800, total: 11800 },
-  { date: "2023-04-01", govigyan: 2780, medicinal: 3908, total: 6688 },
-  { date: "2023-05-01", govigyan: 1890, medicinal: 4800, total: 6690 },
-  { date: "2023-06-01", govigyan: 2390, medicinal: 3800, total: 6190 },
-  { date: "2023-07-01", govigyan: 3490, medicinal: 4300, total: 7790 },
-  { date: "2023-08-01", govigyan: 4000, medicinal: 2400, total: 6400 },
-  { date: "2023-09-01", govigyan: 3000, medicinal: 1398, total: 4398 },
-  { date: "2023-10-01", govigyan: 2000, medicinal: 9800, total: 11800 },
-  { date: "2023-11-01", govigyan: 2780, medicinal: 3908, total: 6688 },
-  { date: "2023-12-01", govigyan: 1890, medicinal: 4800, total: 6690 },
+// Sample data - this would come from your backend in a real app
+const monthlySalesData = [
+  { month: "Jan", govigyan: 4000, medicinal: 2400 },
+  { month: "Feb", govigyan: 3000, medicinal: 1398 },
+  { month: "Mar", govigyan: 2000, medicinal: 9800 },
+  { month: "Apr", govigyan: 2780, medicinal: 3908 },
+  { month: "May", govigyan: 1890, medicinal: 4800 },
+  { month: "Jun", govigyan: 2390, medicinal: 3800 },
+  { month: "Jul", govigyan: 3490, medicinal: 4300 },
+  { month: "Aug", govigyan: 2890, medicinal: 2300 },
+  { month: "Sep", govigyan: 3490, medicinal: 4300 },
+  { month: "Oct", govigyan: 4000, medicinal: 2400 },
+  { month: "Nov", govigyan: 3200, medicinal: 3800 },
+  { month: "Dec", govigyan: 4100, medicinal: 2900 }
 ];
 
-export function SalesReport() {
-  const [chartType, setChartType] = useState("bar");
+const dailySalesData = [
+  { date: "01/03", sales: 4000 },
+  { date: "02/03", sales: 3000 },
+  { date: "03/03", sales: 2000 },
+  { date: "04/03", sales: 2780 },
+  { date: "05/03", sales: 1890 },
+  { date: "06/03", sales: 2390 },
+  { date: "07/03", sales: 3490 },
+  { date: "08/03", sales: 2000 },
+  { date: "09/03", sales: 2500 },
+  { date: "10/03", sales: 2800 },
+  { date: "11/03", sales: 3300 },
+  { date: "12/03", sales: 4200 },
+  { date: "13/03", sales: 4100 },
+  { date: "14/03", sales: 3800 }
+];
 
+const categoryData = [
+  { name: "Govigyan", value: 63 },
+  { name: "Medicinal", value: 37 }
+];
+
+const COLORS = ["#0088FE", "#00C49F"];
+
+export function SalesReport() {
   return (
-    <div className="border border-gray-300 rounded-md overflow-hidden">
-      <div className="p-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h3 className="text-lg font-semibold">Sales Report</h3>
-            <p className="text-sm text-gray-500">Monthly sales breakdown by product category.</p>
-          </div>
-          <div className="flex space-x-2">
-            <button
-              onClick={() => setChartType("bar")}
-              className={`px-3 py-1 rounded-md ${
-                chartType === "bar" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700"
-              }`}
+    <div className="space-y-6">
+      <div className="border border-gray-300 rounded-md overflow-hidden">
+        <div className="p-4 border-b">
+          <h3 className="text-lg font-semibold">Monthly Sales Comparison</h3>
+          <p className="text-sm text-gray-500">
+            Comparison of monthly sales for Govigyan and Medicinal products
+          </p>
+        </div>
+        <div className="p-4 h-64">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart
+              data={monthlySalesData}
+              margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
             >
-              Bar
-            </button>
-            <button
-              onClick={() => setChartType("line")}
-              className={`px-3 py-1 rounded-md ${
-                chartType === "line" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700"
-              }`}
-            >
-              Line
-            </button>
-          </div>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="month" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="govigyan" name="Govigyan" fill="#8884d8" />
+              <Bar dataKey="medicinal" name="Medicinal" fill="#82ca9d" />
+            </BarChart>
+          </ResponsiveContainer>
         </div>
       </div>
-      <div className="p-6">
-        <div className="h-[400px]">
-          {chartType === "bar" ? (
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="border border-gray-300 rounded-md overflow-hidden">
+          <div className="p-4 border-b">
+            <h3 className="text-lg font-semibold">Daily Sales Trend</h3>
+            <p className="text-sm text-gray-500">Sales trend over the last 14 days</p>
+          </div>
+          <div className="p-4 h-64">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={salesData}>
-                <XAxis
-                  dataKey="date"
-                  stroke="#888888"
-                  fontSize={12}
-                  tickLine={false}
-                  axisLine={false}
-                  tickFormatter={(value) =>
-                    new Date(value).toLocaleDateString("en-US", { month: "short" })
-                  }
-                />
-                <YAxis
-                  stroke="#888888"
-                  fontSize={12}
-                  tickLine={false}
-                  axisLine={false}
-                  tickFormatter={(value) => `₹${value}`}
-                />
-                <CartesianGrid strokeDasharray="3 3" className="stroke-gray-200" />
-                <Tooltip
-                  formatter={(value) => [`₹${value}`, ""]}
-                  labelFormatter={(label) =>
-                    new Date(label).toLocaleDateString("en-US", { month: "long", year: "numeric" })
-                  }
-                />
-                <Legend />
-                <Bar dataKey="govigyan" name="Govigyan" fill="#4f46e5" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="medicinal" name="Medicinal" fill="#10b981" radius={[4, 4, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          ) : (
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={salesData}>
-                <XAxis
-                  dataKey="date"
-                  stroke="#888888"
-                  fontSize={12}
-                  tickLine={false}
-                  axisLine={false}
-                  tickFormatter={(value) =>
-                    new Date(value).toLocaleDateString("en-US", { month: "short" })
-                  }
-                />
-                <YAxis
-                  stroke="#888888"
-                  fontSize={12}
-                  tickLine={false}
-                  axisLine={false}
-                  tickFormatter={(value) => `₹${value}`}
-                />
-                <CartesianGrid strokeDasharray="3 3" className="stroke-gray-200" />
-                <Tooltip
-                  formatter={(value) => [`₹${value}`, ""]}
-                  labelFormatter={(label) =>
-                    new Date(label).toLocaleDateString("en-US", { month: "long", year: "numeric" })
-                  }
-                />
+              <LineChart
+                data={dailySalesData}
+                margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="date" />
+                <YAxis />
+                <Tooltip />
                 <Legend />
                 <Line
                   type="monotone"
-                  dataKey="govigyan"
-                  name="Govigyan"
-                  stroke="#4f46e5"
-                  strokeWidth={2}
-                  dot={{ r: 4 }}
-                />
-                <Line
-                  type="monotone"
-                  dataKey="medicinal"
-                  name="Medicinal"
-                  stroke="#10b981"
-                  strokeWidth={2}
-                  dot={{ r: 4 }}
-                />
-                <Line
-                  type="monotone"
-                  dataKey="total"
-                  name="Total"
-                  stroke="#f59e0b"
-                  strokeWidth={2}
-                  dot={{ r: 4 }}
+                  dataKey="sales"
+                  stroke="#8884d8"
+                  activeDot={{ r: 8 }}
                 />
               </LineChart>
             </ResponsiveContainer>
-          )}
+          </div>
+        </div>
+
+        <div className="border border-gray-300 rounded-md overflow-hidden">
+          <div className="p-4 border-b">
+            <h3 className="text-lg font-semibold">Sales Distribution</h3>
+            <p className="text-sm text-gray-500">
+              Distribution of sales between categories
+            </p>
+          </div>
+          <div className="p-4 flex justify-center items-center h-64">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie
+                  data={categoryData}
+                  cx="50%"
+                  cy="50%"
+                  labelLine={false}
+                  label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                  outerRadius={80}
+                  fill="#8884d8"
+                  dataKey="value"
+                >
+                  {categoryData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Pie>
+                <Tooltip />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      </div>
+
+      <div className="border border-gray-300 rounded-md overflow-hidden">
+        <div className="p-4 border-b">
+          <h3 className="text-lg font-semibold">Top Selling Products</h3>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead className="bg-gray-100">
+              <tr>
+                <th className="px-4 py-2 text-left text-sm font-medium">Product</th>
+                <th className="px-4 py-2 text-left text-sm font-medium">Category</th>
+                <th className="px-4 py-2 text-left text-sm font-medium">Units Sold</th>
+                <th className="px-4 py-2 text-left text-sm font-medium">Revenue</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y">
+              <tr className="hover:bg-gray-50">
+                <td className="px-4 py-2 text-sm">Organic Fertilizer</td>
+                <td className="px-4 py-2 text-sm">Govigyan</td>
+                <td className="px-4 py-2 text-sm">245</td>
+                <td className="px-4 py-2 text-sm">₹122,255</td>
+              </tr>
+              <tr className="hover:bg-gray-50">
+                <td className="px-4 py-2 text-sm">Herbal Supplement</td>
+                <td className="px-4 py-2 text-sm">Medicinal</td>
+                <td className="px-4 py-2 text-sm">189</td>
+                <td className="px-4 py-2 text-sm">₹151,011</td>
+              </tr>
+              <tr className="hover:bg-gray-50">
+                <td className="px-4 py-2 text-sm">Neem Oil Extract</td>
+                <td className="px-4 py-2 text-sm">Govigyan</td>
+                <td className="px-4 py-2 text-sm">156</td>
+                <td className="px-4 py-2 text-sm">₹74,880</td>
+              </tr>
+              <tr className="hover:bg-gray-50">
+                <td className="px-4 py-2 text-sm">Ayurvedic Tea</td>
+                <td className="px-4 py-2 text-sm">Medicinal</td>
+                <td className="px-4 py-2 text-sm">132</td>
+                <td className="px-4 py-2 text-sm">₹52,668</td>
+              </tr>
+              <tr className="hover:bg-gray-50">
+                <td className="px-4 py-2 text-sm">Bio Compost</td>
+                <td className="px-4 py-2 text-sm">Govigyan</td>
+                <td className="px-4 py-2 text-sm">98</td>
+                <td className="px-4 py-2 text-sm">₹34,300</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

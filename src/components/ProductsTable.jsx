@@ -39,14 +39,7 @@ export function ProductsTable({ category }) {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <div className="flex items-center space-x-2">
-          <button className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100">
-            Export
-          </button>
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-            Add Product
-          </button>
-        </div>
+        
       </div>
       <div className="border border-gray-300 rounded-md overflow-hidden">
         <table className="w-full">

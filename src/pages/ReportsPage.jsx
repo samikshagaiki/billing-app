@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import { Calendar, Download } from "lucide-react";
 
@@ -10,20 +11,60 @@ import { InventoryReport } from "../components/InventoryReport";
 
 export default function ReportsPage() {
   const location = useLocation();
+  const [dateRange, setDateRange] = useState({
+    start: new Date(new Date().setDate(new Date().getDate() - 30)),  // Default to last 30 days
+    end: new Date()
+  });
+  const [exportLoading, setExportLoading] = useState(false);
 
   const isActive = (path) => location.pathname === `/reports${path}`;
+
+  const handleDateChange = (newDateRange) => {
+    setDateRange(newDateRange);
+    console.log("Date range changed:", newDateRange);
+    // In a real app, you would fetch new data based on the date range
+  };
+
+  const handleExport = () => {
+    setExportLoading(true);
+    
+    // Simulate export process
+    setTimeout(() => {
+      const currentPath = location.pathname;
+      let reportType = "sales";
+      
+      if (currentPath.includes("inventory")) {
+        reportType = "inventory";
+      } else if (currentPath.includes("category")) {
+        reportType = "category";
+      }
+      
+      const fileName = `${reportType}-report-${dateRange.start.toISOString().split('T')[0]}-to-${dateRange.end.toISOString().split('T')[0]}.csv`;
+      
+      // In a real application, you would generate and download a real CSV file
+      // This is just a simulation for demonstration purposes
+      alert(`Report "${fileName}" has been exported successfully!`);
+      
+      setExportLoading(false);
+    }, 1500);
+  };
 
   return (
     <DashboardShell>
       <DashboardHeader heading="Reports" text="View and analyze your store performance.">
         <div className="flex items-center space-x-2">
-          <DateRangePicker />
-          <button className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 flex items-center">
+          <DateRangePicker onDateChange={handleDateChange} />
+          <button 
+            className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 flex items-center disabled:opacity-50"
+            onClick={handleExport}
+            disabled={exportLoading}
+          >
             <Download className="mr-2 h-4 w-4" />
-            Export
+            {exportLoading ? "Exporting..." : "Export"}
           </button>
         </div>
       </DashboardHeader>
+
 
       <div className="space-y-4">
         <div className="flex space-x-2">
