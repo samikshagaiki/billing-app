@@ -21,9 +21,9 @@
   z-index: 50;
 }
 
-/* Logo styling (reduced size) */
+/* Logo styling */
 .logo {
-  font-size: 1.5rem; /* Reduced from 2rem */
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--primary);
   margin: 0;
@@ -42,7 +42,7 @@
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 1.5rem; /* Increased spacing between nav items */
+  gap: 1.5rem;
 }
 
 .nav-link {
@@ -70,40 +70,79 @@
   font-size: 0.9rem;
 }
 
-/* Button overrides */
-.button {
+/* Custom button styling */
+.custom-button {
   padding: 0.75rem 1.5rem;
   font-weight: 500;
+  border-radius: var(--border-radius);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 1.5rem; /* Margin around buttons */
+}
+
+.button.primary.custom-button {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+}
+
+.button.primary.custom-button:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.button.primary.custom-button:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.button.outline.custom-button {
+  border: 2px solid #d1d5db;
+  color: #4b5563;
+}
+
+.button.outline.custom-button:hover {
+  background-color: #f3f4f6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* Increased spacing between buttons in groups */
 .group {
   display: flex;
-  gap: 1.5rem; /* Increased from default */
+  gap: 1.5rem;
 }
 
-.button.primary {
-  background-color: var(--primary);
-  color: white;
-}
-
-.button.primary:hover {
-  background-color: var(--primary-hover);
-}
-
-.button.outline {
-  border: 2px solid #d1d5db;
+/* Form container */
+.form-container {
+  max-width: 48rem; /* Matches max-w-2xl */
+  margin: 0 auto;
+  border: 1px solid #d1d5db;
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  background-color: #ffffff;
 }
 
 /* Add vertical spacing to components */
 article, section, form, div.grid, nav.group {
-  margin: 2rem 0; /* Adds space above and below each component */
+  margin: 2rem 0;
 }
 
 /* Section contrast */
 .contrast {
   background-color: #f3f4f6;
-  padding: 2rem 0; /* Add padding to contrast sections */
+  padding: 2rem 0;
+}
+
+/* Dashboard header */
+.custom-dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0;
 }
 
 /* Dark mode */
@@ -130,8 +169,21 @@ html[data-theme="dark"] .nav-link.active {
   color: #7f9cf5;
 }
 
-html[data-theme="dark"] .button.primary {
-  background-color: #104eb9;
+html[data-theme="dark"] .button.primary.custom-button {
+  background-color: #10b981;
+}
+
+html[data-theme="dark"] .button.primary.custom-button:hover {
+  background-color: #059669;
+}
+
+html[data-theme="dark"] .button.outline.custom-button {
+  border-color: #6b7280;
+  color: #d1d5db;
+}
+
+html[data-theme="dark"] .button.outline.custom-button:hover {
+  background-color: #4a5568;
 }
 
 html[data-theme="dark"] .logo a {
@@ -144,4 +196,41 @@ html[data-theme="dark"] .logo a:hover {
 
 html[data-theme="dark"] .contrast {
   background-color: #2d3748;
+}
+
+html[data-theme="dark"] .form-container {
+  background-color: #2d3748;
+  border-color: #4b5563;
+}
+.category-button {
+  margin: 6px;  
+  padding: 6px 14px;  
+  border-radius: 8px;
+  font-weight: 500;
+  margin-top: 22px;
+  margin-bottom: 22px;
+  transition: background-color 0.2s ease, transform 0.1s ease-in-out;
+}
+
+.category-button.selected {
+  background-color: #1E40AF; /* Deep primary blue */
+  color: white;
+  border: 2px solid #1E3A8A; /* Adds subtle depth */
+}
+
+.category-button:not(.selected) {
+  background-color: #F3F4F6; /* Soft gray */
+  color: #374151; /* Deep gray text */
+  border: 1px solid #D1D5DB;
+}
+
+.category-button:hover {
+  background-color: #D1D5DB; /* Lighter gray hover */
+}
+
+.category-button:active {
+  transform: scale(0.96); /* Subtle press effect */
+  background-color: #1E40AF; /* Deep primary blue */
+  color: white;
+  border: 2px solid #1E3A8A; 
 }

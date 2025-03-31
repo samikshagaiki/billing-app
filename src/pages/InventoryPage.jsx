@@ -24,31 +24,32 @@ export default function InventoryPage() {
         </Link>
       </DashboardHeader>
       <div className="space-y-4">
-        <div className="flex space-x-2">
-          <button 
-            className={`px-3 py-1 rounded-md ${selectedCategory === "all" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700"}`}
-            onClick={() => handleCategoryChange("all")}
-          >
-            All Products
-          </button>
-          <button 
-            className={`px-3 py-1 rounded-md ${selectedCategory === "govigyan" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700"}`}
-            onClick={() => handleCategoryChange("govigyan")}
-          >
-            Govigyan Products
-          </button>
-          <button 
-            className={`px-3 py-1 rounded-md ${selectedCategory === "medicinal" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700"}`}
-            onClick={() => handleCategoryChange("medicinal")}
-          >
-            Medicinal Products
-          </button>
-          <button 
-            className={`px-3 py-1 rounded-md ${selectedCategory === "lowStock" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700"}`}
-            onClick={() => handleCategoryChange("lowStock")}
-          >
-            Low Stock
-          </button>
+      <div className="flex flex-wrap">
+  <button 
+    className={`category-button ${selectedCategory === "all" ? "selected" : ""}`}
+    onClick={() => handleCategoryChange("all")}
+  >
+    All Products
+  </button>
+  <button 
+    className={`category-button ${selectedCategory === "govigyan" ? "selected" : ""}`}
+    onClick={() => handleCategoryChange("govigyan")}
+  >
+    Govigyan Products
+  </button>
+  <button 
+    className={`category-button ${selectedCategory === "medicinal" ? "selected" : ""}`}
+    onClick={() => handleCategoryChange("medicinal")}
+  >
+    Medicinal Products
+  </button>
+  <button 
+    className={`category-button ${selectedCategory === "lowStock" ? "selected" : ""}`}
+    onClick={() => handleCategoryChange("lowStock")}
+  >
+    Low Stock
+  </button>
+
         </div>
         <ProductsTable category={selectedCategory} />
       </div>

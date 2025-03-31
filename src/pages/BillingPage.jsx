@@ -232,12 +232,6 @@ export default function BillingPage() {
           >
             Clear All
           </button>
-          <button
-            onClick={handleGenerateBill}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-          >
-            Generate Bill
-          </button>
         </div>
       </DashboardHeader>
 
@@ -326,7 +320,7 @@ export default function BillingPage() {
                   setActiveTab("govigyan");
                   setBillGenerated(false);
                 }}
-                className={`flex-1 py-2 text-center rounded-t-md ${
+                className={`category-button  ${
                   activeTab === "govigyan" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700"
                 }`}
               >
@@ -337,7 +331,7 @@ export default function BillingPage() {
                   setActiveTab("medicinal");
                   setBillGenerated(false);
                 }}
-                className={`flex-1 py-2 text-center rounded-t-md ${
+                className={`category-button ${
                   activeTab === "medicinal" ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700"
                 }`}
               >
@@ -490,26 +484,27 @@ export default function BillingPage() {
                 setBillGenerated(false);
                 console.log(`${activeTab} cart cleared`);
               }}
-              className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100"
+              className='category-button '
             >
               Clear Cart
             </button>
-            <div className="flex space-x-2">
-              <button 
-                onClick={handlePrintBill}
-                disabled={!billGenerated}
-                className={`px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 flex items-center ${!billGenerated ? 'opacity-50 cursor-not-allowed' : ''}`}
-              >
-                <Printer className="mr-2 h-4 w-4" />
-                Print
-              </button>
-              <button
+            <button
                 onClick={handleGenerateBill}
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center"
+                className='category-button' 
               >
                 <Save className="mr-2 h-4 w-4" />
                 Generate Bill
               </button>
+            <div className="flex space-x-2">
+              <button 
+                onClick={handlePrintBill}
+                disabled={!billGenerated}
+                className={`category-button   ${!billGenerated ? 'opacity-50 cursor-not-allowed' : ''}`}
+              >
+                <Printer className="mr-2 h-4 w-4" />
+                Print
+              </button>
+              
             </div>
           </div>
         </div>
