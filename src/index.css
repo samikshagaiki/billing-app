@@ -1,25 +1,147 @@
-/* Import Pico CSS */
 @import "@picocss/pico/css/pico.min.css";
 
-/* Tailwind Directives */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Custom Styles */
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #ffffff;
-  color: #000000;
+/* Global overrides */
+:root {
+  --primary: #4f46e5; /* Blue primary color */
+  --primary-hover: #4338ca;
+  --spacing: 1.5rem;
+  --border-radius: 0.5rem;
 }
 
-html[class="dark"] body {
+/* Header styling */
+.custom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+/* Logo styling (reduced size) */
+.logo {
+  font-size: 1.5rem; /* Reduced from 2rem */
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0;
+}
+
+.logo a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo a:hover {
+  color: var(--primary-hover);
+}
+
+/* Right-aligned navigation */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* Increased spacing between nav items */
+}
+
+.nav-link {
+  padding: 0.5rem 1rem;
+  color: #4b5563;
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  transition: background-color 0.2s ease;
+}
+
+.nav-link:hover {
+  background-color: #e0e7ff;
+  color: var(--primary);
+}
+
+.nav-link.active {
+  background-color: #e0e7ff;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+/* Button overrides */
+.button {
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+}
+
+/* Increased spacing between buttons in groups */
+.group {
+  display: flex;
+  gap: 1.5rem; /* Increased from default */
+}
+
+.button.primary {
+  background-color: var(--primary);
+  color: white;
+}
+
+.button.primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.button.outline {
+  border: 2px solid #d1d5db;
+}
+
+/* Add vertical spacing to components */
+article, section, form, div.grid, nav.group {
+  margin: 2rem 0; /* Adds space above and below each component */
+}
+
+/* Section contrast */
+.contrast {
+  background-color: #f3f4f6;
+  padding: 2rem 0; /* Add padding to contrast sections */
+}
+
+/* Dark mode */
+html[data-theme="dark"] body {
   background-color: #1a202c;
   color: #e2e8f0;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+html[data-theme="dark"] .custom-header {
+  background-color: #2d3748;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+html[data-theme="dark"] .nav-link {
+  color: #a3bffa;
+}
+
+html[data-theme="dark"] .nav-link:hover {
+  background-color: #4a5568;
+}
+
+html[data-theme="dark"] .nav-link.active {
+  background-color: #4a5568;
+  color: #7f9cf5;
+}
+
+html[data-theme="dark"] .button.primary {
+  background-color: #10b981;
+}
+
+html[data-theme="dark"] .logo a {
+  color: #a3bffa;
+}
+
+html[data-theme="dark"] .logo a:hover {
+  color: #7f9cf5;
+}
+
+html[data-theme="dark"] .contrast {
+  background-color: #2d3748;
 }

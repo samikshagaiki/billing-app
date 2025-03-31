@@ -1,20 +1,38 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ArrowRight, BarChart3, ClipboardList, Package } from "lucide-react";
+import { useTheme } from "next-themes";
 
 export default function HomePage() {
+  const { theme, setTheme } = useTheme();
+  const location = useLocation();
+
   return (
     <div className="container">
-      <header>
-        <hgroup>
-          <h1>Store Billing System</h1>
-          <nav>
-            <Link to="/dashboard">Dashboard</Link>
-            <Link to="/billing">Billing</Link>
-            <Link to="/inventory">Inventory</Link>
-            <Link to="/reports">Reports</Link>
-          </nav>
-        </hgroup>
+      <header className="custom-header">
+        <h1 className="logo">
+          <Link to="/">Store Billing System</Link>
+        </h1>
+        <nav className="nav-right">
+          <Link to="/dashboard" className={`nav-link ${location.pathname === "/dashboard" ? "active" : ""}`}>
+            Dashboard
+          </Link>
+          <Link to="/billing" className={`nav-link ${location.pathname === "/billing" ? "active" : ""}`}>
+            Billing
+          </Link>
+          <Link to="/inventory" className={`nav-link ${location.pathname.startsWith("/inventory") ? "active" : ""}`}>
+            Inventory
+          </Link>
+          <Link to="/reports" className={`nav-link ${location.pathname.startsWith("/reports") ? "active" : ""}`}>
+            Reports
+          </Link>
+          <button
+            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+            className="button outline theme-toggle"
+          >
+            {theme === "light" ? "Dark" : "Light"}
+          </button>
+        </nav>
       </header>
 
       <main>
