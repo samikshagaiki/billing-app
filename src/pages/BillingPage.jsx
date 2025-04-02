@@ -217,21 +217,10 @@ export default function BillingPage() {
 
   return (
     <DashboardShell>
-      <DashboardHeader heading="Billing" text="Create and manage bills for your customers.">
+      <DashboardHeader heading="Billing">
+        <p className="text-sm text-gray-500">Manage customer billing and invoicing.</p>
         <div className="flex space-x-2">
-          <button
-            onClick={() => {
-              setGovigyanCart([]);
-              setMedicinalCart([]);
-              setCustomerName("");
-              setCustomerPhone("");
-              setBillGenerated(false);
-              console.log("Cart cleared");
-            }}
-            className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100"
-          >
-            Clear All
-          </button>
+         
         </div>
       </DashboardHeader>
 
@@ -277,9 +266,23 @@ export default function BillingPage() {
               </div>
             </div>
           </div>
-
+          <button
+            onClick={() => {
+              setGovigyanCart([]);
+              setMedicinalCart([]);
+              setCustomerName("");
+              setCustomerPhone("");
+              setBillGenerated(false);
+              console.log("Cart cleared");
+            }}
+            className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100"
+          >
+            Clear All
+          </button>
+          <br></br>
           <div className="border border-gray-300 rounded-md overflow-hidden">
             <div className="p-6">
+              <br></br>
               <h3 className="text-lg font-semibold">Add Products</h3>
               <p className="text-sm text-gray-500">Search and add products to the bill.</p>
             </div>

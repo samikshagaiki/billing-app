@@ -17,7 +17,9 @@ export default function InventoryPage() {
 
   return (
     <DashboardShell>
-      <DashboardHeader heading="Inventory" text="Manage your product inventory for both categories.">
+      <DashboardHeader heading="Inventory">
+        <p className="text-sm text-gray-500">Manage your products inventory for both categories.</p>
+        <br></br>
         <Link to="/inventory/add" className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center">
           <PlusCircle className="mr-2 h-4 w-4" />
           Add Product

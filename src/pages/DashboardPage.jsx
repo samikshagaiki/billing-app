@@ -9,7 +9,8 @@ import { RecentSales } from "../components/RecentSales.jsx";
 export default function DashboardPage() {
   return (
     <DashboardShell>
-      <DashboardHeader heading="Dashboard" text="Overview of your store performance and recent activity." />
+      <DashboardHeader heading="Dashboard" />
+      <p className="text-sm text-gray-500">Overview of your store performance and recent activity.</p>
       <div className="grid">
         <article>
           <header>

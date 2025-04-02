@@ -51,9 +51,13 @@ export default function ReportsPage() {
 
   return (
     <DashboardShell>
-      <DashboardHeader heading="Reports" text="View and analyze your store performance.">
+      <DashboardHeader heading="Reports"
+      >
+        <p className="text-sm text-gray-500">Generate and export reports for sales, inventory, and more.</p>
+        <br></br>
         <div className="flex items-center space-x-2">
           <DateRangePicker onDateChange={handleDateChange} />
+          <br></br>
           <button 
             className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 flex items-center disabled:opacity-50"
             onClick={handleExport}
@@ -64,10 +68,11 @@ export default function ReportsPage() {
           </button>
         </div>
       </DashboardHeader>
-
+<br></br>
 
       <div className="space-y-4">
         <div className="flex space-x-2">
+          <p>
           <Link
             to="/reports/sales"
             className={`px-3 py-1 rounded-md ${
@@ -78,6 +83,8 @@ export default function ReportsPage() {
           >
             Sales Reports
           </Link>
+          </p>
+          <p>
           <Link
             to="/reports/inventory"
             className={`px-3 py-1 rounded-md ${
@@ -86,6 +93,8 @@ export default function ReportsPage() {
           >
             Inventory Reports
           </Link>
+          </p>
+          <p>
           <Link
             to="/reports/category-analysis"
             className={`px-3 py-1 rounded-md ${
@@ -94,6 +103,7 @@ export default function ReportsPage() {
           >
             Category Analysis
           </Link>
+          </p>
         </div>
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

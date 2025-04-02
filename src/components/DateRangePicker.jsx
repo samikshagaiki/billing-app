@@ -58,6 +58,7 @@ export function DateRangePicker({ onDateChange }) {
 
   return (
     <div className="relative">
+      
       <button 
         className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 flex items-center"
         onClick={() => setIsOpen(!isOpen)}
@@ -65,7 +66,7 @@ export function DateRangePicker({ onDateChange }) {
         <Calendar className="mr-2 h-4 w-4" />
         {formatDate(dateRange.start)} - {formatDate(dateRange.end)}
       </button>
-      
+      <br></br>
       {isOpen && (
         <div className="absolute top-full left-0 mt-2 w-64 bg-white border border-gray-300 rounded-md shadow-lg z-10">
           <div className="p-3 border-b">
